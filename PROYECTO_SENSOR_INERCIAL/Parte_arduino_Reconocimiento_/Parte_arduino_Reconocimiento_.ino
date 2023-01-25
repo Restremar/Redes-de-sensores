@@ -247,15 +247,15 @@ void Calculo() {
     Serial.println(vzGY);
     Serial.println(vzGZ);
 
-  if ((meanSampleAcc > 1.2 && meanSampleAcc < 1.4) && (meanSampleGX < 0.1 && meanSampleGX > -0.17) && (meanSampleGY > 0.35 && meanSampleGY < 0.7) && (meanSampleGZ > 1.0 && meanSampleGZ < 1.2)
-      && (stDevAcc > 0.2 && stDevAcc < 0.35) && (stDevGX > 0.1 && stDevGX < 0.35) && (stDevGY > 0.05 && stDevGY < 0.35) && (stDevGZ > 0.25 && stDevGZ < 0.5) &&
-      (vzAcc > 0.01 && vzAcc < 0.1) && (vzGX > 0.01 && vzGX < 0.1) && (vzGY > 0.0 && vzGY < 0.06) && (vzGZ > 0.05 && vzGZ < 0.25)) {
+  if ((meanSampleAcc >= 1.2 && meanSampleAcc <= 2.0) && (meanSampleGX <= 0.1 && meanSampleGX >= -0.17) && (meanSampleGY >= 0.35 && meanSampleGY <= 0.7) && (meanSampleGZ >= 1.0 && meanSampleGZ <= 1.2)
+      && (stDevAcc >= 0.2 && stDevAcc <= 0.35) && (stDevGX >= 0.1 && stDevGX <= 0.35) && (stDevGY >= 0.05 && stDevGY <= 0.35) && (stDevGZ >= 0.25 && stDevGZ <= 0.5) &&
+      (vzAcc >= 0.01 && vzAcc <= 0.1) && (vzGX >= 0.01 && vzGX <= 0.1) && (vzGY >= 0.0 && vzGY <= 0.06) && (vzGZ >= 0.05 && vzGZ <= 0.25)) {
 
     Serial.println("Se ha reconocido el movimiento de hombro lateral");
 
-  } else if ((meanSampleAcc > 1.4 && meanSampleAcc < 1.6) && (meanSampleGX > -0.6 && meanSampleGX < -0.3) && (meanSampleGY > 1.3 && meanSampleGY < 1.55) && (meanSampleGZ > 0.0 && meanSampleGZ < 0.25)
-             && (stDevAcc > 0.05 && stDevAcc < 0.3) && (stDevGX > 0.0 && stDevGX < 0.2) && (stDevGY > 0.1 && stDevGY < 0.4) && (stDevGZ > 0.05 && stDevGZ < 0.15) &&
-             (vzAcc > 0.01 && vzAcc < 0.1) && (vzGX > 0.0 && vzGX < 0.04) && (vzGY > 0.0 && vzGY < 0.1) && (vzGZ > 0.0 && vzGZ < 0.05)) {
+  } else if ((meanSampleAcc >= 1.4 && meanSampleAcc <= 1.6) && (meanSampleGX >= -0.6 && meanSampleGX <= -0.3) && (meanSampleGY >= 1.3 && meanSampleGY <= 1.55) && (meanSampleGZ >= 0.0 && meanSampleGZ <= 0.25)
+             && (stDevAcc >= 0.05 && stDevAcc <= 0.4) && (stDevGX >= 0.0 && stDevGX <= 0.3) && (stDevGY >= 0.1 && stDevGY <= 0.5) && (stDevGZ >= 0.05 && stDevGZ <= 0.3) &&
+             (vzAcc >= 0.01 && vzAcc <= 0.15) && (vzGX >= 0.0 && vzGX <= 0.07) && (vzGY >= 0.0 && vzGY <= 0.2) && (vzGZ >= 0.0 && vzGZ <= 0.05)) {
 
     Serial.println("Se ha reconocido el movimiento de press militar");
 
