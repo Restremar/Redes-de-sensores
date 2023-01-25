@@ -13,14 +13,19 @@ char datos[3];
 void setup() {
   Serial.begin(115200);
   Serial.println("Starting BLE work!");
-
+  
+  // Create the BLE Device
   BLEDevice::init("ESP32");
+
+  //Set the BLE device as a server.
   BLEServer *pServer = BLEDevice::createServer();
 
-  // Create the BLE Service
+  //Create a service for the BLE server with the UUID defined earlier.
   BLEService *pService = pServer->createService(SERVICE_UUID);
 
-  // Create a BLE Characteristic
+  //set the characteristic for that service. 
+  //You also use the UUID defined earlier, and you need to pass 
+  //as arguments the characteristic’s properties. In this case, it’s: READ and WRITE.
   pCharacteristic = pService->createCharacteristic(
                                          CHARACTERISTIC_UUID,
                                          BLECharacteristic::PROPERTY_READ |
@@ -46,5 +51,5 @@ void loop() {
   String(contador).toCharArray(datos,3);
   pCharacteristic->setValue(contador);
   pCharacteristic->notify();
-  delay(2000);
+  delay(1000); //delay de 1s
 }

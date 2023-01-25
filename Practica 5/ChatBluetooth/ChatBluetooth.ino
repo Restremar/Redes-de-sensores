@@ -14,7 +14,7 @@ void setup()
 {
   Serial.begin(115200);
 
-  SerialBT.begin("ESP32test"); //Bluetooth device name
+  SerialBT.begin("ESP32test"); //Bluetooth device name that will appear
   Serial.println("The device started, now you can pair it with bluetooth!");
 }
 
@@ -22,11 +22,11 @@ void loop()
 {
     if (Serial.available())
     {
-      SerialBT.write(Serial.read());
+      SerialBT.write(Serial.read()); //Write and send it from the serial with bluetooth
     }
     if (SerialBT.available())
     {
-      Serial.write(SerialBT.read());
+      Serial.write(SerialBT.read()); //Read from bluetooth, receive in the Serial
     }
     delay(20);
   
