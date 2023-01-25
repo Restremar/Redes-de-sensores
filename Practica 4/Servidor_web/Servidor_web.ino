@@ -28,6 +28,7 @@ void printLocalTime()
 } 
 
 // Reemplaza el marcador del valor de la hora por la actual 
+// La función es lo que atribuirá un valor al marcador de posición que hemos creado en el archivo HTML
 String processor(const String& var){
   Serial.println(var);
   if(var == "HOUR"){
@@ -53,14 +54,12 @@ void setup() {
   // Serial port
   Serial.begin(115200);
 
-  // Inicializo SPIFFS
+  // Inicializo SPIFFS (Sistema de archivos flash de interfaz periférica en serie)
   if (!SPIFFS.begin(true)) {
     Serial.println("An Error has occurred while mounting SPIFFS");
     return;
   }
 
-  WiFi.mode(WIFI_STA);
-  WiFi.setSleep(false); // Desactiva la suspensión de wifi en modo STA para mejorar la velocidad de respuesta
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED)
   {
@@ -73,16 +72,22 @@ void setup() {
   configTime(gmtOffset_sec, daylightOffset_sec, ntpServer); //Configuro la hora con los parametros definidos
 
   // Ruta para la pagina web
+  //Cuando el servidor recibe solicitud en la URL "/" enviará el archivo index.html al cliente y 
+  //sustituira el valor del marcador por la hora actual dado que llamamos a la funcion processor
     server.on("/", HTTP_GET, [](AsyncWebServerRequest * request) {
     request->send(SPIFFS, "/index.html", String(), false, processor);
   });
 
   // Ruta para cargar el archivo style.css
+  //Como se hace referencia al archivo .css en el .html el cliente realiza petición para el archivo
+  //y el servidor envía el archivo style.css cuando eso sucede 
   server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest * request) {
     request->send(SPIFFS, "/style.css", "text/css");
   });
   
   // Ruta para resetear la hora
+  //Cuando el servidor recibe solicitud en la URL "/reset" enviará el archivo index.html al cliente y 
+  //sustituira el valor del marcador por 00:00 dado que llamamos a la funcion processor2
   server.on("/reset", HTTP_GET, [](AsyncWebServerRequest * request) {
     request->send(SPIFFS, "/index.html", String(), false, processor2);
   });
